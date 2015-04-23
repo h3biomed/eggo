@@ -67,7 +67,7 @@ class JsonFileParameter(Parameter):
         return json_data
 
 
-class ToastConfig(Config):
+class ToastConfig(object):
     config = JsonFileParameter()
 
 
