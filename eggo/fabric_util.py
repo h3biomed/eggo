@@ -94,7 +94,7 @@ def _install_genetorrent():
     with cd('/usr/local/genetorrent'):
         run('wget https://cghub.ucsc.edu/software/downloads/GeneTorrent/3.8.7/GeneTorrent-download-3.8.7-207-CentOS6.4.x86_64.tar.gz')
         run('tar -xvf GeneTorrent-download-3.8.7-207-CentOS6.4.x86_64.tar.gz')
-    run('echo "export PATH=$PATH:/usr/local/genetorrent" >> ~/.bash_profile')
+    run('echo "export PATH=$PATH:/usr/local/genetorrent/cghub/bin" >> ~/.bash_profile')
 
 
 def _install_adam():
@@ -127,6 +127,7 @@ def _setup_master(maven_version='3.2.5', eggo_fork='bigdatagenomics',
     _install_maven(maven_version)
     _install_adam()
     _install_eggo(fork=eggo_fork, branch=eggo_branch)
+    _install_genetorrent()
     run('/root/ephemeral-hdfs/bin/stop-all.sh')
     run('/root/ephemeral-hdfs/bin/start-all.sh')
 
@@ -134,6 +135,7 @@ def _setup_master(maven_version='3.2.5', eggo_fork='bigdatagenomics',
 def _setup_slave(eggo_fork='bigdatagenomics', eggo_branch='master'):
     _install_pip()
     _install_eggo(fork=eggo_fork, branch=eggo_branch)
+    _install_genetorrent()
 
 
 def _toast(config):
