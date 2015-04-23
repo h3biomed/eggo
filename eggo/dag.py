@@ -363,7 +363,7 @@ class VCF2ADAMTask(Task):
         pass
 
 
-class BAM2ADAMTask(Task):
+class BAM2ADAMTask(Task, ToastConfig):
 
     def requires(self):
         basic = ADAMBasicTask(adam_command='transform',
@@ -371,7 +371,7 @@ class BAM2ADAMTask(Task):
         flat = ADAMFlattenTask(adam_command='transform',
                                allowed_file_formats=['sam', 'bam'])
         dependencies = [basic]
-        for edition in ToastConfig().config['editions']:
+        for edition in self.config['editions']:
             if edition == 'basic':
                 pass # included by default
             elif edition == 'flat':
