@@ -51,10 +51,10 @@ class CountKmersTask(ADAMBasicTask):
             kmer_length=self.kmer_length)
 
     def requires(self):
-        return ADAMTransformTask(source_uri=self.source_uri, delete=False)
+        return ADAMTransformTask(source_uri=self.source_uri)
 
     def output(self):
-        return S3Target(self.source_uri.replace('.adam', '.kmer'))
+        return S3Target(self.source_uri.replace('.bam', '.kmer'))
 
 
 if __name__ == '__main__':
