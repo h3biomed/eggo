@@ -353,9 +353,11 @@ class ADAMBasicTask(Task):
 
         # 2. Run the adam-submit job
         adam_cmd = ('{adam_home}/bin/adam-submit --master {spark_master} '
+                    '--executor-memory {executor_memory} '
                     '{adam_command}').format(
                         adam_home=eggo_config.get('worker_env', 'adam_home'),
                         spark_master=eggo_config.get('worker_env', 'spark_master'),
+                        executor_memory=eggo_config.get('worker_env', 'executor_memory'),
                         adam_command=adam_command)
         check_call(adam_cmd, shell=True)
 
