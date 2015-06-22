@@ -315,7 +315,7 @@ class DeleteDatasetTask(Task):
 
 class ADAMBasicTask(Task):
 
-    copy_to_hdfs = BoolParameter(True, is_significant=False)
+    copy_to_hdfs = BoolParameter(True, significant=False)
 
     @property
     def adam_command(self):
