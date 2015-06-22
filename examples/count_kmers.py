@@ -27,6 +27,7 @@ class ADAMTransformTask(ADAMBasicTask):
 
     source_uri = Parameter()
 
+    @property
     def adam_command(self):
         return 'transform {source} {target}'.format(
             source=self.input().path,
@@ -44,6 +45,7 @@ class CountKmersTask(ADAMBasicTask):
     source_uri = Parameter()
     kmer_length = Parameter(21)
 
+    @property
     def adam_command(self):
         return 'count_kmers {source} {target} {kmer_length}'.format(
             source=self.input().path,
