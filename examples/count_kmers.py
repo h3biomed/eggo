@@ -14,7 +14,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""Luigi workflow to convert bams to ADAM, convert ADAM to fastq, and count kmers"""
+"""Luigi workflow to convert bams to ADAM and count kmers"""
 
 import luigi
 from luigi import Parameter
