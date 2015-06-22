@@ -361,6 +361,12 @@ class ADAMBasicTask(Task):
                         adam_command=adam_command)
         check_call(adam_cmd, shell=True)
 
+        if self.copy_to_hdfs:
+            delete_tmp_cmd = '{hadoop_home}/bin/hadoop fs -rm -r {tmp_file}'.format(
+                hadoop_home=eggo_config.get('worker_env', 'hadoop_home'),
+                tmp_file=tmp_hadoop_path)
+            check_call(delete_tmp_cmd, shell=True)
+
 
 class ConvertToADAMTask(ADAMBasicTask):
 
