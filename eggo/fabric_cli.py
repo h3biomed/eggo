@@ -211,7 +211,7 @@ def install_eggo(work_path, eggo_home, fork, branch):
                 with wcd('eggo'):
                     wrun('git checkout origin/{0}'.format(branch))
     with wcd(eggo_home):
-        wrun('pip install .')
+        wrun('python setup.py install')
 
 
 def create_hdfs_users():
@@ -388,7 +388,6 @@ def delete_all(config):
 @task
 def update_eggo():
     work_path = eggo_config.get('worker_env', 'work_path')
-    venv_path = eggo_config.get('worker_env', 'venv_path')
     eggo_fork = eggo_config.get('versions', 'eggo_fork')
     eggo_branch = eggo_config.get('versions', 'eggo_branch')
     eggo_home = eggo_config.get('worker_env', 'eggo_home')
@@ -398,6 +397,7 @@ def update_eggo():
         if exec_ctx in ['director', 'spark_ec2']:
             wrun('rm -rf {0}'.format(eggo_home))
         install_eggo(work_path, eggo_home, eggo_fork, eggo_branch)
+
 
     execute(do, hosts=get_worker_hosts())
 
