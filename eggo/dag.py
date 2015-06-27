@@ -362,7 +362,7 @@ class ADAMBasicTask(Task):
         check_call(adam_cmd, shell=True)
 
         if self.copy_to_hdfs:
-            delete_tmp_cmd = '{hadoop_home}/bin/hadoop fs -rm -r {tmp_file}'.format(
+            delete_tmp_cmd = '{hadoop_home}/bin/hadoop fs -rmr {tmp_file}'.format(
                 hadoop_home=eggo_config.get('worker_env', 'hadoop_home'),
                 tmp_file=tmp_hadoop_path)
             check_call(delete_tmp_cmd, shell=True)
@@ -405,7 +405,7 @@ class ADAMFlattenTask(ADAMBasicTask):
     @property
     def adam_command(self):
         return 'flatten {source} {target}'.format(
-            self.input().path, self.output().path)
+            source=self.input().path, target=self.output().path)
 
     def requires(self):
         return ConvertToADAMTask(edition=self.source_edition,
